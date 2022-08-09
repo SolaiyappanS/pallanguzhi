@@ -1,0 +1,105 @@
+body {
+  margin-top: 3vh;
+  color: white;
+}
+
+#board {
+  width: 500px;
+  height: 500px;
+  font-size: 40px;
+  color: white;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#msgboard {
+  font-size: 20px;
+  color: white;
+  width: 350px;
+  height: 500px;
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.kuli {
+  display: block;
+  background-color: #0004;
+}
+
+.kuli span {
+  width: 70px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.kuli p {
+  display: inline-block;
+  width: 230px;
+  background-color: #0005;
+  border-radius: 50px;
+  height: 70px;
+  border: 2px solid #0000;
+}
+
+#play1 {
+  background-color: #1004;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+#play2 {
+  background-color: #0114;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+.kuli-path {
+  background-color: #feea;
+  color: #700;
+}
+
+.kuli-block {
+  background-color: #fff5;
+  color: #0008;
+}
+
+#board span {
+  border-radius: 50%;
+  display: inline-block;
+  height: 70px;
+  cursor: pointer;
+  border: 2px solid #0000;
+}
+
+.kuli-start {
+  background-color: #500a;
+}
+
+.kuli-end {
+  background-color: #0206;
+}
+
+#playbutton {
+  cursor: pointer;
+  font-size: 75px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  display: inline-block;
+}
+
+.player {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.initial {
+  background-color: #0004;
+}
+
+#gameCode {
+  font-size: 25px;
+}

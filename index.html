@@ -5,6 +5,109 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pallanguzhi</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+    <script src="link.js"></script>
+    <script src="gameControls.js"></script>
   </head>
-  <body></body>
+  <body class="bg-dark">
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div id="titleNavBar" class="h3 text-light">Pallanguzhi</div>
+        <div
+          id="langbtn"
+          class="flex-end btn btn-primary"
+          onclick="changelang()"
+        >
+          Switch to Tamil
+        </div>
+      </div>
+    </nav>
+    <div class="d-flex text-center">
+      <div id="homePage" class="cover-container p-3 mx-auto">
+        <div class="w-100 m-auto">
+          <h1 id="titleHomePage" class="h3 mb-3">Pallanguzhi</h1>
+          <input
+            id="oldGameCode"
+            class="w-100 form-control m-2"
+            placeholder="Enter 6 digit code"
+          />
+          <button
+            class="w-100 btn btn-lg btn-success m-2 mb-4"
+            onclick="joinExistingGame()"
+          >
+            Join Game
+          </button>
+          <button
+            class="w-100 btn btn-lg btn-primary m-2"
+            onclick="createNewGame()"
+          >
+            Create New Game
+          </button>
+        </div>
+      </div>
+      <div
+        id="gamePage"
+        class="cover-container p-3 mx-auto"
+        style="display: none"
+      >
+        <div id="board">
+          <span id="gameCode">GAME CODE: A1B2C3</span>
+          <div id="play1" class="kuli">
+            <div class="player text-left pt-2">P1</div>
+            <span id="kuli2" class="initial" onclick="select(1);">0</span>
+            <span id="kuli3" class="initial" onclick="select(2);">0</span>
+            <span id="kuli4" class="initial" onclick="select(3);">0</span>
+            <span id="kuli5" class="initial" onclick="select(4);">0</span>
+            <span id="kuli6" class="initial" onclick="select(5);">0</span>
+            <br />
+            <span id="kuli1" class="initial" onclick="select(0);">0</span>
+            <p id="kuli15">0</p>
+            <span id="kuli7" class="initial" onclick="select(6);">0</span>
+          </div>
+          <div id="play2" class="kuli">
+            <span id="kuli14" class="initial" onclick="select(13);">0</span>
+            <p id="kuli16">0</p>
+            <span id="kuli8" class="initial" onclick="select(7);">0</span>
+            <br />
+            <span id="kuli13" class="initial" onclick="select(12);">0</span>
+            <span id="kuli12" class="initial" onclick="select(11);">0</span>
+            <span id="kuli11" class="initial" onclick="select(10);">0</span>
+            <span id="kuli10" class="initial" onclick="select(9);">0</span>
+            <span id="kuli9" class="initial" onclick="select(8);">0</span>
+            <div class="player text-right pb-2">P2</div>
+          </div>
+        </div>
+        <div id="msgboard">
+          <a onclick="start()">
+            <i id="playbutton" class="fas fa-play"></i>
+          </a>
+          <div id="tamilMsg" style="display: none">
+            விளையாட்டைத் தொடங்க Space Key அல்லது Play பட்டனை அழுத்தவும்
+          </div>
+          <div id="englishMsg">
+            Press Play button or Space Key to start the game
+          </div>
+          <div id="tamilPasu" style="display: none"></div>
+          <div id="englishPasu"></div>
+          <div id="tamilGameOver" style="display: none"></div>
+          <div id="englishGameOver"></div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
