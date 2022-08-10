@@ -133,14 +133,14 @@ function updateVal() {
       updateData("classes/" + i, "kuli");
     } else {
       np1Blocks++;
-      updateData("classes/" + i, "kuli");
+      updateData("classes/" + i, "kuli-block");
     }
   }
   for (i = 7; i < 14 - p2Blocks; i++) {
     if (p2Amount >= 5) {
       updateData("kuli/" + i, 5);
       updateData("p2Amount", p2Amount - 5);
-      updateData("classes/" + i, "kuli-path");
+      updateData("classes/" + i, "kuli");
     } else {
       np2Blocks++;
       updateData("classes/" + i, "kuli-block");
