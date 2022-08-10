@@ -25,29 +25,37 @@
     <script src="gameControls.js"></script>
   </head>
   <body class="bg-dark text-light">
-    <nav class="navbar navbar-dark bg-dark">
-      <div class="container-fluid">
-        <div id="titleNavBar" class="h3 text-light">Pallanguzhi</div>
-        <div
+    <nav class="navbar navbar-dark bg-dark container-fluid">
+      <div id="titleNavBar" class="h3 text-light">Pallanguzhi</div>
+      <div class="text-end">
+        <span
           id="playerBtn"
-          class="btn btn-primary"
+          class="btn btn-primary m-1"
           onclick="switchPlayer()"
           style="display: none"
         >
-          Switch Player
-        </div>
-        <div
+          Change Player
+        </span>
+        <span
+          id="deleteBtn"
+          class="btn btn-primary m-1"
+          onclick="deleteGame()"
+          style="display: none"
+        >
+          New Game
+        </span>
+        <span
           id="restartBtn"
-          class="btn btn-primary"
+          class="btn btn-primary m-1"
           onclick="resetGame()"
           style="display: none"
         >
-          Restart
-        </div>
+          Restart Game
+        </span>
       </div>
     </nav>
     <div class="d-flex text-center">
-      <div id="homePage" class="cover-container p-3 mx-auto">
+      <div id="homePage" class="p-3 mx-auto">
         <div class="w-100 m-auto">
           <h1 id="titleHomePage" class="h3 mb-3">Pallanguzhi</h1>
           <input
@@ -75,14 +83,10 @@
           </button>
         </div>
       </div>
-      <div
-        id="gamePage"
-        class="cover-container p-3 mx-auto"
-        style="display: none"
-      >
-        <div id="board">
-          <span id="gameCode">GAME CODE: A1B2C3</span>
-          <div class="black pb-3 px-3">
+      <div id="gamePage" class="p-3 mx-auto" style="display: none">
+        <div id="board" class="mx-5">
+          <h3 id="gameCode">GAME CODE: SAMPLE</h3>
+          <div class="black pb-3 px-3 mt-4 rounded">
             <div class="player text-left pt-2">P1</div>
             <span id="kuli2" class="kuli" onclick="select(1);">0</span>
             <span id="kuli3" class="kuli" onclick="select(2);">0</span>
@@ -94,8 +98,8 @@
             <span id="kuli15" class="kuli long">0</span>
             <span id="kuli7" class="kuli" onclick="select(6);">0</span>
           </div>
-          <hr />
-          <div class="black pt-3 px-3">
+          <hr class="m-0 p-0" />
+          <div class="black pt-3 px-3 rounded">
             <span id="kuli14" class="kuli" onclick="select(13);">0</span>
             <span id="kuli16" class="kuli long">0</span>
             <span id="kuli8" class="kuli" onclick="select(7);">0</span>
@@ -109,7 +113,9 @@
           </div>
         </div>
         <div id="msgboard">
-          <p id="playerInfo" class="btn btn-danger m-5">You are Player 1</p>
+          <p id="playerInfo" class="h4 border border-light p-3 rounded m-5">
+            You're Player 1
+          </p>
           <a onclick="start()">
             <i id="playButton" class="fas fa-play"></i>
           </a>

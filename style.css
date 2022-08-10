@@ -2,6 +2,7 @@
   width: 500px;
   font-size: 40px;
   display: inline-block;
+  align-content: stretch;
 }
 
 #msgboard {
@@ -14,8 +15,9 @@
 .kuli {
   border-radius: 50px;
   display: inline-block;
-  height: 70px;
-  width: 70px;
+  height: 70px !important;
+  width: 70px !important;
+  padding: 0;
   cursor: pointer;
   border: 1px solid #0000;
   background-color: #fff1;
@@ -24,7 +26,7 @@
 }
 
 .long {
-  width: 232.5px;
+  width: 232px !important;
 }
 
 .path {
@@ -52,7 +54,7 @@
 #playButton {
   cursor: pointer;
   font-size: 75px;
-  margin-top: 75px;
+  margin-top: 50px;
   margin-bottom: 50px;
   display: block;
 }
@@ -60,17 +62,4 @@
 .player {
   font-size: 20px;
   font-weight: bold;
-}
-
-#gameCode,
-#playerInfo {
-  font-size: 25px;
-  display: inline-block;
-  font-weight: bold;
-}
-
-hr {
-  height: 1px;
-  margin: 0;
-  padding: 0;
 }

@@ -15,13 +15,13 @@ var isPlayer1 = true;
 var canPlayerPlay = true;
 
 function switchPlayer() {
-  if (document.getElementById("playerInfo").innerHTML !== "Player 2") {
+  if (document.getElementById("playerInfo").innerHTML !== "You're Player 2") {
     if (confirm("You're Player 1. Do you want to be Player 2?")) {
-      document.getElementById("playerInfo").innerHTML = "Player 2";
+      document.getElementById("playerInfo").innerHTML = "You're Player 2";
       isPlayer1 = false;
     }
   } else if (confirm("You're Player 2. Do you want to be Player 1?")) {
-    document.getElementById("playerInfo").innerHTML = "Player 1";
+    document.getElementById("playerInfo").innerHTML = "You're Player 1";
     isPlayer1 = true;
   }
   canPlayerPlay = isP1Turn == isPlayer1;
@@ -98,8 +98,9 @@ function resetGame() {
   document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
   document.getElementById("homePage").style.display = "none";
   document.getElementById("gamePage").style.display = "block";
-  document.getElementById("restartBtn").style.display = "block";
-  document.getElementById("playerBtn").style.display = "block";
+  document.getElementById("restartBtn").style.display = "inline";
+  document.getElementById("playerBtn").style.display = "inline";
+  document.getElementById("deleteBtn").style.display = "inline";
   startTheGame();
   tempAlert("Press Play button or Space Key to start the game");
 }
@@ -128,8 +129,9 @@ function createNewGame() {
   document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
   document.getElementById("homePage").style.display = "none";
   document.getElementById("gamePage").style.display = "block";
-  document.getElementById("restartBtn").style.display = "block";
-  document.getElementById("playerBtn").style.display = "block";
+  document.getElementById("restartBtn").style.display = "inline";
+  document.getElementById("playerBtn").style.display = "inline";
+  document.getElementById("deleteBtn").style.display = "inline";
   startTheGame();
 }
 
@@ -145,14 +147,22 @@ function joinExistingGame() {
         document.getElementById("gamePage").style.display = "block";
         document.getElementById("gameCode").innerHTML =
           "GAME CODE: " + gameCode;
-        document.getElementById("restartBtn").style.display = "block";
-        document.getElementById("playerBtn").style.display = "block";
+        document.getElementById("restartBtn").style.display = "inline";
+        document.getElementById("playerBtn").style.display = "inline";
+        document.getElementById("deleteBtn").style.display = "inline";
         document.getElementById("noGameFound").style.display = "none";
         startTheGame();
       } else {
         document.getElementById("noGameFound").style.display = "block";
       }
     });
+}
+
+function deleteGame() {
+  if (confirm("Are you sure for a New Game? This Game will be deleted.")) {
+    firebase.database().ref(gameCode).remove();
+    createNewGame();
+  }
 }
 
 function updateVal() {
