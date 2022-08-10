@@ -15,13 +15,13 @@ var isPlayer1 = true;
 var canPlayerPlay = true;
 
 function switchPlayer() {
-  if (document.getElementById("playerBtn").innerHTML !== "Player 2") {
+  if (document.getElementById("playerInfo").innerHTML !== "Player 2") {
     if (confirm("You're Player 1. Do you want to be Player 2?")) {
-      document.getElementById("playerBtn").innerHTML = "Player 2";
+      document.getElementById("playerInfo").innerHTML = "Player 2";
       isPlayer1 = false;
     }
   } else if (confirm("You're Player 2. Do you want to be Player 1?")) {
-    document.getElementById("playerBtn").innerHTML = "Player 1";
+    document.getElementById("playerInfo").innerHTML = "Player 1";
     isPlayer1 = true;
   }
   canPlayerPlay = isP1Turn == isPlayer1;

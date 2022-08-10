@@ -5,7 +5,6 @@ body {
 
 #board {
   width: 500px;
-  height: 500px;
   font-size: 40px;
   color: white;
   display: inline-block;
@@ -16,7 +15,6 @@ body {
   font-size: 20px;
   color: white;
   width: 350px;
-  height: 500px;
   display: inline-block;
   vertical-align: top;
   padding-top: 10px;
@@ -25,7 +23,7 @@ body {
 
 .kuli {
   display: block;
-  background-color: #0004;
+  background-color: #fff1;
 }
 
 .kuli span {
@@ -37,21 +35,21 @@ body {
 .kuli p {
   display: inline-block;
   width: 230px;
-  background-color: #0005;
+  background-color: #fff1;
   border-radius: 50px;
   height: 70px;
   border: 2px solid #0000;
 }
 
 #play1 {
-  background-color: #1004;
+  background-color: #0006;
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
 }
 
 #play2 {
-  background-color: #0114;
+  background-color: #0006;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 10px;
@@ -75,11 +73,11 @@ body {
 }
 
 .kuli-start {
-  background-color: #2007;
+  background-color: #afa2;
 }
 
 .kuli-end {
-  background-color: #0207;
+  background-color: #aaf2;
 }
 
 #playButton {
@@ -96,9 +94,16 @@ body {
 }
 
 .initial {
-  background-color: #0004;
+  background-color: #fff1;
 }
 
-#gameCode {
+#gameCode,
+#playerInfo {
   font-size: 25px;
+}
+
+hr {
+  height: 1px;
+  margin: 0;
+  padding: 0;
 }
