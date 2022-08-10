@@ -151,10 +151,6 @@ function joinExistingGame() {
         startTheGame();
       } else {
         document.getElementById("noGameFound").style.display = "block";
-        document.getElementById("homePage").style.display = "block";
-        document.getElementById("gamePage").style.display = "none";
-        document.getElementById("restartBtn").style.display = "none";
-        document.getElementById("playerBtn").style.display = "none";
       }
     });
 }
