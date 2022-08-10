@@ -101,6 +101,7 @@ function resetGame() {
   document.getElementById("restartBtn").style.display = "block";
   document.getElementById("playerBtn").style.display = "block";
   startTheGame();
+  tempAlert("Press Play button or Space Key to start the game");
 }
 
 function createNewGame() {
@@ -168,7 +169,7 @@ function updateVal() {
       updateData("classes/" + i, "kuli");
     } else {
       np1Blocks++;
-      updateData("classes/" + i, "kuli-block");
+      updateData("classes/" + i, "kuli blocked");
     }
   }
   for (i = 7; i < 14 - p2Blocks; i++) {
@@ -178,7 +179,7 @@ function updateVal() {
       updateData("classes/" + i, "kuli");
     } else {
       np2Blocks++;
-      updateData("classes/" + i, "kuli-block");
+      updateData("classes/" + i, "kuli blocked");
     }
   }
   updateData("p1Blocks", np1Blocks);
@@ -270,7 +271,7 @@ function excecute(v) {
     //Continuing excecution
     if (
       document.getElementById("kuli" + (((v + j) % 14) + 2)).classList ==
-      "kuli-block"
+      "kuli blocked"
     ) {
       x++;
       i--;
@@ -285,32 +286,32 @@ function excecute(v) {
   updateData("currentKuli", v);
   if (
     document.getElementById("kuli" + (currentKuli + 1)).classList ==
-    "kuli-block"
+    "kuli blocked"
   ) {
     if (currentKuli < 7) updateData("currentKuli", 7);
     else updateData("currentKuli", 0);
   }
   var i;
   for (i = 0; i < 7 - p1Blocks; i++) {
-    if (i == previousKuli) updateData("classes/" + i, "kuli-start");
+    if (i == previousKuli) updateData("classes/" + i, "kuli start");
     else if (i > previousKuli && i < currentKuli && previousKuli < currentKuli)
-      updateData("classes/" + i, "kuli-path");
+      updateData("classes/" + i, "kuli path");
     else if (i > previousKuli && i != currentKuli && previousKuli > currentKuli)
-      updateData("classes/" + i, "kuli-path");
+      updateData("classes/" + i, "kuli path");
     else if (i < currentKuli && previousKuli > currentKuli)
-      updateData("classes/" + i, "kuli-path");
-    else if (i == currentKuli) updateData("classes/" + i, "kuli-end");
+      updateData("classes/" + i, "kuli path");
+    else if (i == currentKuli) updateData("classes/" + i, "kuli end");
     else updateData("classes/" + i, "kuli");
   }
   for (i = 7; i < 14 - p2Blocks; i++) {
-    if (i == previousKuli) updateData("classes/" + i, "kuli-start");
+    if (i == previousKuli) updateData("classes/" + i, "kuli start");
     else if (i > previousKuli && i < currentKuli && previousKuli < currentKuli)
-      updateData("classes/" + i, "kuli-path");
+      updateData("classes/" + i, "kuli path");
     else if (i > previousKuli && i != currentKuli && previousKuli > currentKuli)
-      updateData("classes/" + i, "kuli-path");
+      updateData("classes/" + i, "kuli path");
     else if (i < currentKuli && previousKuli > currentKuli)
-      updateData("classes/" + i, "kuli-path");
-    else if (i == currentKuli) updateData("classes/" + i, "kuli-end");
+      updateData("classes/" + i, "kuli path");
+    else if (i == currentKuli) updateData("classes/" + i, "kuli end");
     else updateData("classes/" + i, "kuli");
   }
 }
@@ -318,7 +319,7 @@ function excecute(v) {
 function empty(v) {
   var v1 = v + 1;
   v1 %= 14;
-  while (document.getElementById("kuli" + (v1 + 1)).classList == "kuli-block")
+  while (document.getElementById("kuli" + (v1 + 1)).classList == "kuli blocked")
     v1 = (v1 + 1) % 14;
   if (isP1Turn) {
     updateData("p1Amount", p1Amount + kuli[v1]);
@@ -404,7 +405,9 @@ function select(v) {
         updateData("previousKuli", currentKuli);
         excecute(v);
       } else {
-        if (document.getElementById("kuli" + (v + 1)).classList == "kuli-block")
+        if (
+          document.getElementById("kuli" + (v + 1)).classList == "kuli blocked"
+        )
           tempAlert("Can't select a blocked hole. Select any other hole.");
         else tempAlert("Can't select zero. Select any other hole.");
       }

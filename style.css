@@ -1,91 +1,60 @@
-body {
-  margin-top: 3vh;
-  color: white;
-}
-
 #board {
   width: 500px;
   font-size: 40px;
-  color: white;
   display: inline-block;
-  vertical-align: top;
 }
 
 #msgboard {
   font-size: 20px;
-  color: white;
   width: 350px;
   display: inline-block;
   vertical-align: top;
-  padding-top: 10px;
-  padding-left: 20px;
 }
 
 .kuli {
-  display: block;
-  background-color: #fff1;
-}
-
-.kuli span {
-  width: 70px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-
-.kuli p {
-  display: inline-block;
-  width: 230px;
-  background-color: #fff1;
   border-radius: 50px;
-  height: 70px;
-  border: 2px solid #0000;
-}
-
-#play1 {
-  background-color: #0006;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-}
-
-#play2 {
-  background-color: #0006;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-}
-
-.kuli-path {
-  background-color: #fff2;
-}
-
-.kuli-block {
-  background-color: #faa5;
-  color: #800;
-}
-
-#board span {
-  border-radius: 50%;
   display: inline-block;
   height: 70px;
+  width: 70px;
   cursor: pointer;
-  border: 2px solid #0000;
+  border: 1px solid #0000;
+  background-color: #fff1;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.kuli-start {
-  background-color: #afa2;
+.long {
+  width: 232.5px;
 }
 
-.kuli-end {
-  background-color: #aaf2;
+.path {
+  background-color: #fff3;
+}
+
+.blocked {
+  background-color: #777;
+  color: #000;
+  cursor: default;
+}
+
+.black {
+  background-color: #0007;
+}
+
+.start {
+  background-color: #afa4;
+}
+
+.end {
+  background-color: #aaf4;
 }
 
 #playButton {
   cursor: pointer;
   font-size: 75px;
-  margin-top: 100px;
+  margin-top: 75px;
   margin-bottom: 50px;
-  display: inline-block;
+  display: block;
 }
 
 .player {
@@ -93,13 +62,11 @@ body {
   font-weight: bold;
 }
 
-.initial {
-  background-color: #fff1;
-}
-
 #gameCode,
 #playerInfo {
   font-size: 25px;
+  display: inline-block;
+  font-weight: bold;
 }
 
 hr {

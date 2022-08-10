@@ -24,7 +24,7 @@
     <script src="link.js"></script>
     <script src="gameControls.js"></script>
   </head>
-  <body class="bg-dark">
+  <body class="bg-dark text-light">
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <div id="titleNavBar" class="h3 text-light">Pallanguzhi</div>
@@ -54,22 +54,25 @@
             id="oldGameCode"
             class="w-100 form-control m-2"
             placeholder="Enter 6 digit code"
+            onkeyup="document.getElementById('joinBtn').disabled=!(this.value.trim()!='')"
           />
           <button
-            class="w-100 btn btn-lg btn-success m-2 mb-4"
+            id="joinBtn"
+            class="w-100 btn btn-lg btn-success m-2"
             onclick="joinExistingGame()"
+            disabled
           >
             Join Game
           </button>
+          <div id="noGameFound" class="text-warning m-2" style="display: none">
+            Invalid Game Code.<br />No worries, create a New game and play :)
+          </div>
           <button
             class="w-100 btn btn-lg btn-primary m-2"
             onclick="createNewGame()"
           >
             Create New Game
           </button>
-          <div id="noGameFound" class="text-warning m-2" style="display: none">
-            Invalid Game Code.<br />No worries, create a New game and play :)
-          </div>
         </div>
       </div>
       <div
@@ -79,34 +82,34 @@
       >
         <div id="board">
           <span id="gameCode">GAME CODE: A1B2C3</span>
-          <p id="playerInfo">Player 1</p>
-          <div id="play1" class="kuli">
+          <div class="black pb-3 px-3">
             <div class="player text-left pt-2">P1</div>
-            <span id="kuli2" class="initial" onclick="select(1);">0</span>
-            <span id="kuli3" class="initial" onclick="select(2);">0</span>
-            <span id="kuli4" class="initial" onclick="select(3);">0</span>
-            <span id="kuli5" class="initial" onclick="select(4);">0</span>
-            <span id="kuli6" class="initial" onclick="select(5);">0</span>
+            <span id="kuli2" class="kuli" onclick="select(1);">0</span>
+            <span id="kuli3" class="kuli" onclick="select(2);">0</span>
+            <span id="kuli4" class="kuli" onclick="select(3);">0</span>
+            <span id="kuli5" class="kuli" onclick="select(4);">0</span>
+            <span id="kuli6" class="kuli" onclick="select(5);">0</span>
             <br />
-            <span id="kuli1" class="initial" onclick="select(0);">0</span>
-            <p id="kuli15">0</p>
-            <span id="kuli7" class="initial" onclick="select(6);">0</span>
+            <span id="kuli1" class="kuli" onclick="select(0);">0</span>
+            <span id="kuli15" class="kuli long">0</span>
+            <span id="kuli7" class="kuli" onclick="select(6);">0</span>
           </div>
           <hr />
-          <div id="play2" class="kuli">
-            <span id="kuli14" class="initial" onclick="select(13);">0</span>
-            <p id="kuli16">0</p>
-            <span id="kuli8" class="initial" onclick="select(7);">0</span>
+          <div class="black pt-3 px-3">
+            <span id="kuli14" class="kuli" onclick="select(13);">0</span>
+            <span id="kuli16" class="kuli long">0</span>
+            <span id="kuli8" class="kuli" onclick="select(7);">0</span>
             <br />
-            <span id="kuli13" class="initial" onclick="select(12);">0</span>
-            <span id="kuli12" class="initial" onclick="select(11);">0</span>
-            <span id="kuli11" class="initial" onclick="select(10);">0</span>
-            <span id="kuli10" class="initial" onclick="select(9);">0</span>
-            <span id="kuli9" class="initial" onclick="select(8);">0</span>
+            <span id="kuli13" class="kuli" onclick="select(12);">0</span>
+            <span id="kuli12" class="kuli" onclick="select(11);">0</span>
+            <span id="kuli11" class="kuli" onclick="select(10);">0</span>
+            <span id="kuli10" class="kuli" onclick="select(9);">0</span>
+            <span id="kuli9" class="kuli" onclick="select(8);">0</span>
             <div class="player text-right pb-2">P2</div>
           </div>
         </div>
         <div id="msgboard">
+          <p id="playerInfo" class="btn btn-danger m-5">You are Player 1</p>
           <a onclick="start()">
             <i id="playButton" class="fas fa-play"></i>
           </a>
