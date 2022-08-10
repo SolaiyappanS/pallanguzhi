@@ -11,6 +11,21 @@ var p2Blocks = 0;
 var previousKuli = 0;
 var currentKuli = 0;
 var isCollected = true;
+var isPlayer1 = true;
+var canPlayerPlay = true;
+
+function switchPlayer() {
+  if (document.getElementById("playerBtn").innerHTML !== "Player 2") {
+    if (confirm("You're Player 1. Do you want to be Player 2?")) {
+      document.getElementById("playerBtn").innerHTML = "Player 2";
+      isPlayer1 = false;
+    }
+  } else if (confirm("You're Player 2. Do you want to be Player 1?")) {
+    document.getElementById("playerBtn").innerHTML = "Player 1";
+    isPlayer1 = true;
+  }
+  canPlayerPlay = isP1Turn == isPlayer1;
+}
 
 function updateData(data, value) {
   firebase
@@ -44,6 +59,7 @@ function startTheGame() {
       currentKuli = res.val().currentKuli;
       isCollected = res.val().isCollected;
       document.getElementById("playButton").classList = res.val().playButton;
+      canPlayerPlay = res.val().isP1Turn == isPlayer1;
     });
 }
 
@@ -82,6 +98,8 @@ function resetGame() {
   document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
   document.getElementById("homePage").style.display = "none";
   document.getElementById("gamePage").style.display = "block";
+  document.getElementById("restartBtn").style.display = "block";
+  document.getElementById("playerBtn").style.display = "block";
   startTheGame();
 }
 
@@ -109,6 +127,8 @@ function createNewGame() {
   document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
   document.getElementById("homePage").style.display = "none";
   document.getElementById("gamePage").style.display = "block";
+  document.getElementById("restartBtn").style.display = "block";
+  document.getElementById("playerBtn").style.display = "block";
   startTheGame();
 }
 
@@ -119,6 +139,8 @@ function joinExistingGame() {
     document.getElementById("homePage").style.display = "none";
     document.getElementById("gamePage").style.display = "block";
     document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
+    document.getElementById("restartBtn").style.display = "block";
+    document.getElementById("playerBtn").style.display = "block";
     startTheGame();
   } else alert("Invalid Code");
 }
@@ -287,11 +309,17 @@ function empty(v) {
     v1 = (v1 + 1) % 14;
   if (isP1Turn) {
     updateData("p1Amount", p1Amount + kuli[v1]);
-    if (kuli[v1] != 0) tempAlert("Player 1 earns " + kuli[v1] + " point(s).");
+    if (kuli[v1] != 0)
+      tempAlert(
+        "Player 1 earns " + kuli[v1] + " point(s). Now it's Player 2's turn."
+      );
     else tempAlert("Player 1 earns no points in this turn.");
   } else {
     updateData("p2Amount", p2Amount + kuli[v1]);
-    if (kuli[v1] != 0) tempAlert("Player 2 earns " + kuli[v1] + " point(s).");
+    if (kuli[v1] != 0)
+      tempAlert(
+        "Player 2 earns " + kuli[v1] + " point(s). Now it's Player 1's turn."
+      );
     else tempAlert("Player 2 earns no points in this turn.");
   }
   updateData("kuli/" + v1, 0);
@@ -355,7 +383,7 @@ function pasu() {
 }
 
 function select(v) {
-  if (canPress) {
+  if (canPress && canPlayerPlay) {
     if ((isP1Turn && v < 7) || (!isP1Turn && v >= 7 && v < 14)) {
       if (kuli[v] != 0) {
         updateData("playButton", "fas fa-angle-double-right");

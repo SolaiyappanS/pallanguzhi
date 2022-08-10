@@ -28,7 +28,22 @@
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <div id="titleNavBar" class="h3 text-light">Pallanguzhi</div>
-        <div id="playerBtn" class="flex-end btn btn-primary">Player 1</div>
+        <div
+          id="playerBtn"
+          class="btn btn-primary"
+          onclick="switchPlayer()"
+          style="display: none"
+        >
+          Player 1
+        </div>
+        <div
+          id="restartBtn"
+          class="btn btn-primary"
+          onclick="resetGame()"
+          style="display: none"
+        >
+          Restart
+        </div>
       </div>
     </nav>
     <div class="d-flex text-center">
