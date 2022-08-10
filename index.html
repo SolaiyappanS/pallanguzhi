@@ -28,13 +28,7 @@
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <div id="titleNavBar" class="h3 text-light">Pallanguzhi</div>
-        <div
-          id="langbtn"
-          class="flex-end btn btn-primary"
-          onclick="changelang()"
-        >
-          Switch to Tamil
-        </div>
+        <div id="playerBtn" class="flex-end btn btn-primary">Player 1</div>
       </div>
     </nav>
     <div class="d-flex text-center">
@@ -94,18 +88,11 @@
         </div>
         <div id="msgboard">
           <a onclick="start()">
-            <i id="playbutton" class="fas fa-play"></i>
+            <i id="playButton" class="fas fa-play"></i>
           </a>
-          <div id="tamilMsg" style="display: none">
-            விளையாட்டைத் தொடங்க Space Key அல்லது Play பட்டனை அழுத்தவும்
-          </div>
-          <div id="englishMsg">
-            Press Play button or Space Key to start the game
-          </div>
-          <div id="tamilPasu" style="display: none"></div>
-          <div id="englishPasu"></div>
-          <div id="tamilGameOver" style="display: none"></div>
-          <div id="englishGameOver"></div>
+          <div id="msg">Press Play button or Space Key to start the game</div>
+          <div id="pasu"></div>
+          <div id="gameOver"></div>
         </div>
       </div>
     </div>
