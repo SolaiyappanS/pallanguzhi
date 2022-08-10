@@ -134,15 +134,27 @@ function createNewGame() {
 
 function joinExistingGame() {
   var code = document.getElementById("oldGameCode").value;
-  if (/^[A-Z0-9]{6}$/.test(code)) {
-    gameCode = code;
-    document.getElementById("homePage").style.display = "none";
-    document.getElementById("gamePage").style.display = "block";
-    document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
-    document.getElementById("restartBtn").style.display = "block";
-    document.getElementById("playerBtn").style.display = "block";
-    startTheGame();
-  } else alert("Invalid Code");
+  firebase
+    .database()
+    .ref("/")
+    .on("value", (res) => {
+      if (code in res.val()) {
+        gameCode = code;
+        document.getElementById("homePage").style.display = "none";
+        document.getElementById("gamePage").style.display = "block";
+        document.getElementById("gameCode").innerHTML =
+          "GAME CODE: " + gameCode;
+        document.getElementById("restartBtn").style.display = "block";
+        document.getElementById("playerBtn").style.display = "block";
+        startTheGame();
+      } else {
+        alert("Invalid Game Code (or) Game doesn't exists");
+        document.getElementById("homePage").style.display = "block";
+        document.getElementById("gamePage").style.display = "none";
+        document.getElementById("restartBtn").style.display = "none";
+        document.getElementById("playerBtn").style.display = "none";
+      }
+    });
 }
 
 function updateVal() {
