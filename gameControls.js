@@ -146,9 +146,10 @@ function joinExistingGame() {
           "GAME CODE: " + gameCode;
         document.getElementById("restartBtn").style.display = "block";
         document.getElementById("playerBtn").style.display = "block";
+        document.getElementById("noGameFound").style.display = "none";
         startTheGame();
       } else {
-        alert("Invalid Game Code (or) Game doesn't exists");
+        document.getElementById("noGameFound").style.display = "block";
         document.getElementById("homePage").style.display = "block";
         document.getElementById("gamePage").style.display = "none";
         document.getElementById("restartBtn").style.display = "none";

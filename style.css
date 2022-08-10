@@ -58,13 +58,12 @@ body {
 }
 
 .kuli-path {
-  background-color: #feea;
-  color: #700;
+  background-color: #fff2;
 }
 
 .kuli-block {
-  background-color: #fff5;
-  color: #0008;
+  background-color: #faa5;
+  color: #800;
 }
 
 #board span {
@@ -76,11 +75,11 @@ body {
 }
 
 .kuli-start {
-  background-color: #500a;
+  background-color: #2007;
 }
 
 .kuli-end {
-  background-color: #0206;
+  background-color: #0207;
 }
 
 #playButton {
