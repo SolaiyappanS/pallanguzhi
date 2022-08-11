@@ -19,26 +19,24 @@
       href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css?family=Allerta Stencil"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
     <script src="link.js"></script>
     <script src="gameControls.js"></script>
   </head>
   <body class="bg-dark text-light">
-    <nav class="navbar navbar-dark bg-dark container-fluid">
-      <div id="titleNavBar" class="h3 text-light">Pallanguzhi</div>
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="h3 text-light m-3" title="Home" onclick="home()">
+        Pallanguzhi
+      </div>
       <div class="text-end">
         <span
-          id="playerBtn"
-          class="btn btn-primary m-1"
-          onclick="switchPlayer()"
-          style="display: none"
-        >
-          Change Player
-        </span>
-        <span
           id="deleteBtn"
-          class="btn btn-primary m-1"
+          class="btn black m-3"
           onclick="deleteGame()"
           style="display: none"
         >
@@ -46,7 +44,7 @@
         </span>
         <span
           id="restartBtn"
-          class="btn btn-primary m-1"
+          class="btn black m-3"
           onclick="resetGame()"
           style="display: none"
         >
@@ -57,7 +55,7 @@
     <div class="d-flex text-center">
       <div id="homePage" class="p-3 mx-auto">
         <div class="w-100 m-auto">
-          <h1 id="titleHomePage" class="h3 mb-3">Pallanguzhi</h1>
+          <h1 class="h3 mb-3">Pallanguzhi</h1>
           <input
             id="oldGameCode"
             class="w-100 form-control m-2"
@@ -113,7 +111,12 @@
           </div>
         </div>
         <div id="msgboard">
-          <p id="playerInfo" class="h4 border border-light p-3 rounded m-5">
+          <p
+            id="playerInfo"
+            class="h4 border border-light p-3 rounded m-5"
+            onclick="switchPlayer()"
+            title="Click here to switch players"
+          >
             You're Player 1
           </p>
           <a onclick="start()">

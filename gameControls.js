@@ -1,4 +1,4 @@
-var gameCode = "";
+var gameCode = "initial";
 var kuli = new Array(14).fill(0);
 var isNewRound = false;
 var canPress = false;
@@ -99,7 +99,6 @@ function resetGame() {
   document.getElementById("homePage").style.display = "none";
   document.getElementById("gamePage").style.display = "block";
   document.getElementById("restartBtn").style.display = "inline";
-  document.getElementById("playerBtn").style.display = "inline";
   document.getElementById("deleteBtn").style.display = "inline";
   startTheGame();
   tempAlert("Press Play button or Space Key to start the game");
@@ -130,7 +129,6 @@ function createNewGame() {
   document.getElementById("homePage").style.display = "none";
   document.getElementById("gamePage").style.display = "block";
   document.getElementById("restartBtn").style.display = "inline";
-  document.getElementById("playerBtn").style.display = "inline";
   document.getElementById("deleteBtn").style.display = "inline";
   startTheGame();
 }
@@ -148,7 +146,6 @@ function joinExistingGame() {
         document.getElementById("gameCode").innerHTML =
           "GAME CODE: " + gameCode;
         document.getElementById("restartBtn").style.display = "inline";
-        document.getElementById("playerBtn").style.display = "inline";
         document.getElementById("deleteBtn").style.display = "inline";
         document.getElementById("noGameFound").style.display = "none";
         startTheGame();
@@ -162,6 +159,19 @@ function deleteGame() {
   if (confirm("Are you sure for a New Game? This Game will be deleted.")) {
     firebase.database().ref(gameCode).remove();
     createNewGame();
+  }
+}
+
+function home() {
+  if (
+    gameCode !== "initial" &&
+    confirm("Are you sure to leave this Game? This Game will be deleted.")
+  ) {
+    firebase.database().ref(gameCode).remove();
+    document.getElementById("homePage").style.display = "block";
+    document.getElementById("gamePage").style.display = "none";
+    document.getElementById("restartBtn").style.display = "none";
+    document.getElementById("deleteBtn").style.display = "none";
   }
 }
 
