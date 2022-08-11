@@ -1,5 +1,16 @@
+:root {
+  --pal-primary: #2c3639;
+  --pal-secondary: #3f4e4f;
+  --pal-tertiary: #a27b5c;
+  --pal-tertiary-hover: #8a694e;
+  --pal-light: #dcd7c9;
+  --pal-earth: #586469;
+  --pal-earth-hover: #6a6448;
+}
+
 body {
   font-family: "Lexend Deca";
+  color: var(--pal-light);
 }
 
 #board {
@@ -17,10 +28,11 @@ body {
 
 .kuli {
   font-size: 44px;
-  font-family: "Allerta Stencil";
+  font-family: "Finlandica";
   height: 70px;
   width: 70px;
-  background-color: #fff1;
+  color: var(--pal-light);
+  background-color: var(--pal-earth);
   border: 1px solid #0000;
   border-radius: 50%;
   margin-top: 10px;
@@ -35,17 +47,13 @@ body {
 }
 
 .path {
-  background-color: #fff3;
+  background-color: #aff4;
 }
 
 .blocked {
-  color: #000;
-  background-color: #777;
+  color: var(--pal-earth);
+  background-color: #0001;
   cursor: default;
-}
-
-.black {
-  background-color: #0007;
 }
 
 .start {
@@ -56,20 +64,43 @@ body {
   background-color: #aaf4;
 }
 
-.pink {
-  color: #ffffff;
-  background-color: #ff008e;
-  border: #d22779;
-}
-
-.pink:hover {
-  background-color: #d22779;
-}
-
 #playButton {
+  color: var(--pal-light);
   font-size: 75px;
   margin-top: 50px;
   margin-bottom: 50px;
   display: block;
   cursor: pointer;
+}
+
+.bg-pal-primary {
+  color: var(--pal-light);
+  background-color: var(--pal-primary);
+}
+
+.bg-pal-secondary {
+  color: var(--pal-light);
+  background-color: var(--pal-secondary);
+}
+
+.bg-pal-tertiary {
+  color: #ffffff;
+  background-color: var(--pal-tertiary);
+}
+
+.bg-pal-tertiary:hover {
+  background-color: var(--pal-tertiary-hover);
+  border-color: var(--pal-tertiary-hover);
+}
+
+.text-pal-tertiary {
+  color: var(--pal-tertiary);
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--pal-light);
 }

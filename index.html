@@ -16,7 +16,7 @@
       crossorigin="anonymous"
     ></script>
     <link
-      href="https://fonts.googleapis.com/css?family=Allerta Stencil"
+      href="https://fonts.googleapis.com/css?family=Finlandica"
       rel="stylesheet"
     />
     <link
@@ -28,27 +28,24 @@
     <script src="link.js"></script>
     <script src="gameControls.js"></script>
   </head>
-  <body class="bg-dark text-light">
+  <body class="bg-pal-primary">
     <nav class="navbar navbar-dark">
       <div class="h3 m-3">Pallanguzhi</div>
       <div id="gameBtns" class="text-end m-3 my-2" style="display: none">
-        <span
-          class="fs-5 text-light btn border border-light my-1"
-          onclick="home()"
-        >
+        <span class="fs-5 btn bg-pal-tertiary my-1" onclick="home()">
           Home
         </span>
-        <span
-          class="fs-5 text-light btn border border-light my-1"
-          onclick="deleteGame()"
-        >
+        <span class="fs-5 btn bg-pal-tertiary my-1" onclick="deleteGame()">
           New Game
         </span>
-        <span
-          class="fs-5 text-light btn border border-light my-1"
-          onclick="resetGame()"
-        >
+        <span class="fs-5 btn bg-pal-tertiary my-1" onclick="resetGame()">
           Restart Game
+        </span>
+        <span
+          class="fs-5 btn bg-pal-tertiary my-1"
+          onclick="showInstructions()"
+        >
+          Instructions
         </span>
       </div>
     </nav>
@@ -64,19 +61,22 @@
           />
           <button
             id="joinBtn"
-            class="w-100 btn btn-lg btn-success my-2"
+            class="w-100 btn btn-lg bg-pal-tertiary my-2"
             onclick="joinExistingGame()"
             disabled
           >
             Join Game
           </button>
           <button
-            class="w-100 btn btn-lg btn-primary my-2"
+            class="w-100 btn btn-lg bg-pal-tertiary my-2"
             onclick="createNewGame()"
           >
             Create New Game
           </button>
-          <button class="w-100 btn btn-lg pink my-2" onclick="howToPlay()">
+          <button
+            class="w-100 btn btn-lg bg-pal-tertiary my-2"
+            onclick="showInstructions()"
+          >
             How To Play?
           </button>
           <div
@@ -91,8 +91,8 @@
       <div id="gamePage" class="p-3 mx-auto" style="display: none">
         <div id="board" class="mx-5">
           <h3 id="gameCode">GAME CODE: SAMPLE</h3>
-          <div class="black pb-3 px-3 mt-4 rounded">
-            <div class="fw-bold fs-6 text-start pt-2">P1</div>
+          <div class="bg-pal-secondary pb-3 px-3 mt-4 rounded">
+            <div class="fw-bold fs-6 text-start pt-2">Player 1</div>
             <span id="kuli2" class="kuli" onclick="select(1);">0</span>
             <span id="kuli3" class="kuli" onclick="select(2);">0</span>
             <span id="kuli4" class="kuli" onclick="select(3);">0</span>
@@ -104,7 +104,7 @@
             <span id="kuli7" class="kuli" onclick="select(6);">0</span>
           </div>
           <hr class="m-0 p-0" style="opacity: 0" />
-          <div class="black pt-3 px-3 rounded">
+          <div class="bg-pal-secondary pt-3 px-3 rounded">
             <span id="kuli14" class="kuli" onclick="select(13);">0</span>
             <span id="kuli16" class="kuli long">0</span>
             <span id="kuli8" class="kuli" onclick="select(7);">0</span>
@@ -114,13 +114,13 @@
             <span id="kuli11" class="kuli" onclick="select(10);">0</span>
             <span id="kuli10" class="kuli" onclick="select(9);">0</span>
             <span id="kuli9" class="kuli" onclick="select(8);">0</span>
-            <div class="fw-bold fs-6 text-end pb-2">P2</div>
+            <div class="fw-bold fs-6 text-end pb-2">Player 2</div>
           </div>
         </div>
         <div id="msgboard">
           <p
             id="playerInfo"
-            class="fs-4 text-light btn border border-light mt-5"
+            class="fs-4 btn bg-pal-tertiary mt-5"
             onclick="switchPlayer()"
             title="Change player"
           >
@@ -136,7 +136,7 @@
       </div>
       <div id="infoPage" class="modal modal-sheet p-5" style="display: none">
         <div class="modal-dialog">
-          <div class="modal-content rounded shadow bg-dark">
+          <div class="modal-content rounded shadow bg-pal-secondary">
             <div class="modal-header border-bottom-0">
               <h5 class="modal-title">How To Play Pallanguzhi?</h5>
             </div>
@@ -203,10 +203,10 @@
             <div class="modal-footer flex-column border-top-0">
               <button
                 type="button"
-                class="btn btn-lg btn-primary w-50 mx-0 mb-2"
-                onclick="home()"
+                class="btn btn-lg bg-pal-tertiary w-50 mx-0 mb-2"
+                onclick="hideInstructions()"
               >
-                Home
+                Back
               </button>
             </div>
           </div>
