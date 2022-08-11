@@ -1,8 +1,11 @@
+body {
+  font-family: "Lexend Deca";
+}
+
 #board {
-  width: 500px;
   font-size: 40px;
+  width: 500px;
   display: inline-block;
-  align-content: stretch;
 }
 
 #msgboard {
@@ -13,21 +16,22 @@
 }
 
 .kuli {
-  border-radius: 50px;
-  display: inline-block;
-  font-family: "Allerta Stencil";
-  height: 70px !important;
-  width: 70px !important;
   font-size: 44px;
-  cursor: pointer;
-  border: 1px solid #0000;
+  font-family: "Allerta Stencil";
+  height: 70px;
+  width: 70px;
   background-color: #fff1;
+  border: 1px solid #0000;
+  border-radius: 50%;
   margin-top: 10px;
   margin-bottom: 10px;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .long {
-  width: 232px !important;
+  width: 232px;
+  border-radius: 50px;
 }
 
 .path {
@@ -35,8 +39,8 @@
 }
 
 .blocked {
-  background-color: #777;
   color: #000;
+  background-color: #777;
   cursor: default;
 }
 
@@ -52,15 +56,20 @@
   background-color: #aaf4;
 }
 
+.pink {
+  color: #ffffff;
+  background-color: #ff008e;
+  border: #d22779;
+}
+
+.pink:hover {
+  background-color: #d22779;
+}
+
 #playButton {
-  cursor: pointer;
   font-size: 75px;
   margin-top: 50px;
   margin-bottom: 50px;
   display: block;
-}
-
-.player {
-  font-size: 20px;
-  font-weight: bold;
+  cursor: pointer;
 }

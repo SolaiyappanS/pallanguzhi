@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pallanguzhi</title>
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-      rel="stylesheet"
-    />
+    <script
+      src="https://kit.fontawesome.com/0a03bb24ff.js"
+      crossorigin="anonymous"
+    ></script>
     <link
       href="https://fonts.googleapis.com/css?family=Allerta Stencil"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lexend Deca"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
@@ -29,24 +29,21 @@
     <script src="gameControls.js"></script>
   </head>
   <body class="bg-dark text-light">
-    <nav class="navbar navbar-dark bg-dark">
-      <div class="h3 text-light m-3" title="Home" onclick="home()">
-        Pallanguzhi
-      </div>
-      <div class="text-end">
+    <nav class="navbar navbar-dark">
+      <div class="h3 m-3">Pallanguzhi</div>
+      <div id="gameBtns" class="text-end mx-3" style="display: none">
+        <span class="fs-5 text-light btn border border-light" onclick="home()">
+          Home
+        </span>
         <span
-          id="deleteBtn"
-          class="btn black m-3"
+          class="fs-5 text-light btn border border-light"
           onclick="deleteGame()"
-          style="display: none"
         >
           New Game
         </span>
         <span
-          id="restartBtn"
-          class="btn black m-3"
+          class="fs-5 text-light btn border border-light"
           onclick="resetGame()"
-          style="display: none"
         >
           Restart Game
         </span>
@@ -58,26 +55,33 @@
           <h1 class="h3 mb-3">Pallanguzhi</h1>
           <input
             id="oldGameCode"
-            class="w-100 form-control m-2"
+            class="w-100 form-control my-2"
             placeholder="Enter 6 digit code"
-            onkeyup="document.getElementById('joinBtn').disabled=!(this.value.trim()!='')"
+            onkeyup="document.getElementById('joinBtn').disabled=!/^[A-Z0-9]{6}$/.test(this.value.trim())"
           />
           <button
             id="joinBtn"
-            class="w-100 btn btn-lg btn-success m-2"
+            class="w-100 btn btn-lg btn-success my-2"
             onclick="joinExistingGame()"
             disabled
           >
             Join Game
           </button>
-          <div id="noGameFound" class="text-warning m-2" style="display: none">
-            Invalid Game Code.<br />No worries, create a New game and play :)
+          <div
+            id="noGameFound"
+            class="w-100 text-warning my-2"
+            style="display: none"
+          >
+            Invalid Game Code. No worries, create a New game and play :)
           </div>
           <button
-            class="w-100 btn btn-lg btn-primary m-2"
+            class="w-100 btn btn-lg btn-primary my-2"
             onclick="createNewGame()"
           >
             Create New Game
+          </button>
+          <button class="w-100 btn btn-lg pink my-2" onclick="howToPlay()">
+            How To Play?
           </button>
         </div>
       </div>
@@ -85,7 +89,7 @@
         <div id="board" class="mx-5">
           <h3 id="gameCode">GAME CODE: SAMPLE</h3>
           <div class="black pb-3 px-3 mt-4 rounded">
-            <div class="player text-left pt-2">P1</div>
+            <div class="fw-bold fs-6 text-start pt-2">P1</div>
             <span id="kuli2" class="kuli" onclick="select(1);">0</span>
             <span id="kuli3" class="kuli" onclick="select(2);">0</span>
             <span id="kuli4" class="kuli" onclick="select(3);">0</span>
@@ -96,7 +100,7 @@
             <span id="kuli15" class="kuli long">0</span>
             <span id="kuli7" class="kuli" onclick="select(6);">0</span>
           </div>
-          <hr class="m-0 p-0" />
+          <hr class="m-0 p-0" style="opacity: 0" />
           <div class="black pt-3 px-3 rounded">
             <span id="kuli14" class="kuli" onclick="select(13);">0</span>
             <span id="kuli16" class="kuli long">0</span>
@@ -107,24 +111,98 @@
             <span id="kuli11" class="kuli" onclick="select(10);">0</span>
             <span id="kuli10" class="kuli" onclick="select(9);">0</span>
             <span id="kuli9" class="kuli" onclick="select(8);">0</span>
-            <div class="player text-right pb-2">P2</div>
+            <div class="fw-bold fs-6 text-end pb-2">P2</div>
           </div>
         </div>
         <div id="msgboard">
           <p
             id="playerInfo"
-            class="h4 border border-light p-3 rounded m-5"
+            class="fs-4 text-light btn border border-light mt-5"
             onclick="switchPlayer()"
-            title="Click here to switch players"
+            title="Change player"
           >
             You're Player 1
           </p>
           <a onclick="start()">
-            <i id="playButton" class="fas fa-play"></i>
+            <i id="playButton" class="far fa-play"></i>
           </a>
           <div id="msg">Press Play button or Space Key to start the game</div>
           <div id="pasu"></div>
           <div id="gameOver"></div>
+        </div>
+      </div>
+      <div id="infoPage" class="modal modal-sheet p-5" style="display: none">
+        <div class="modal-dialog">
+          <div class="modal-content rounded shadow bg-dark">
+            <div class="modal-header border-bottom-0">
+              <h5 class="modal-title">How To Play Pallanguzhi?</h5>
+            </div>
+            <div class="modal-body text-start">
+              <p>
+                You can start the game by clicking the play button or the Space
+                key. Player 1 should start the game.
+              </p>
+              <p>
+                The upper half of the board belongs to Player 1 and the lower
+                half belongs to Player 2. Initially, 35 points(5 points for each
+                kuzhi) will be given to both players. And the points will be
+                distributed to all the kuzhis.
+              </p>
+              <p>
+                The player should choose a kuzhi that belongs to him/her. Then
+                the points in that kuzhi will be distributed to the next kuzhis
+                one by one.
+              </p>
+              <p>
+                After distributing all the points the player should distribute
+                the points in adjacent kuzhi to the next kuzhis one by one.
+              </p>
+              <p>
+                (Here these will be done automatically by pressing the Play
+                button or Space key continuously) The turn will end only after
+                there are no points in the adjacent kuzhi. Then the points in
+                the next kuzhi go to the Player who is playing.
+              </p>
+              <p>
+                Once a player finishes his/her turn, it notifies the other
+                player to choose a kuzhi that belongs to him/her. Repeat this
+                procedure and continue playing.
+              </p>
+              <p>
+                If a kuzhi reaches the number 4 at the end of a turn, that will
+                be taken and the points will be added to the player to whom the
+                kuzhi belongs. It is called 'PASU'.
+              </p>
+              <p>
+                If any half of the board becomes completely zero, the round will
+                end. Then the distribution process will be done once again, but
+                this time all the kuzhis of the player having points less than
+                35 will not be filled. Those empty kuzhis will be 'BLOCKED' and
+                a player should not put any points in that kuzhi.
+              </p>
+              <p>
+                When a player gets less than five points at the end of a round,
+                the game will come to an end and the player with higher points
+                will be considered the Winner.
+              </p>
+              <p>
+                Game created by
+                <a
+                  href="https://www.linkedin.com/in/solaiyappan-shanmuganathan-67513016b/"
+                  >Solaiyappan Shanmuganathan</a
+                >. Happy Playing :)
+              </p>
+            </div>
+            <div class="modal-footer flex-column border-top-0">
+              <button
+                type="button"
+                class="btn btn-lg btn-primary w-50 mx-0 mb-2"
+                onclick="home()"
+              >
+                Home
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -92,14 +92,15 @@ function resetGame() {
       p2Blocks: 0,
       previousKuli: 0,
       currentKuli: 0,
-      playButton: "fas fa-play",
+      playButton: "fas fa-circle-play",
     });
 
   document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
   document.getElementById("homePage").style.display = "none";
   document.getElementById("gamePage").style.display = "block";
-  document.getElementById("restartBtn").style.display = "inline";
-  document.getElementById("deleteBtn").style.display = "inline";
+  document.getElementById("gameBtns").style.display = "inline";
+  document.getElementById("infoPage").style.display = "none";
+  document.getElementById("noGameFound").style.display = "none";
   startTheGame();
   tempAlert("Press Play button or Space Key to start the game");
 }
@@ -122,14 +123,15 @@ function createNewGame() {
       p2Blocks: 0,
       previousKuli: 0,
       currentKuli: 0,
-      playButton: "fas fa-play",
+      playButton: "fas fa-circle-play",
     });
 
   document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
   document.getElementById("homePage").style.display = "none";
   document.getElementById("gamePage").style.display = "block";
-  document.getElementById("restartBtn").style.display = "inline";
-  document.getElementById("deleteBtn").style.display = "inline";
+  document.getElementById("gameBtns").style.display = "inline";
+  document.getElementById("infoPage").style.display = "none";
+  document.getElementById("noGameFound").style.display = "none";
   startTheGame();
 }
 
@@ -145,8 +147,8 @@ function joinExistingGame() {
         document.getElementById("gamePage").style.display = "block";
         document.getElementById("gameCode").innerHTML =
           "GAME CODE: " + gameCode;
-        document.getElementById("restartBtn").style.display = "inline";
-        document.getElementById("deleteBtn").style.display = "inline";
+        document.getElementById("gameBtns").style.display = "inline";
+        document.getElementById("infoPage").style.display = "none";
         document.getElementById("noGameFound").style.display = "none";
         startTheGame();
       } else {
@@ -168,10 +170,18 @@ function home() {
     confirm("Are you sure to leave this Game? This Game will be deleted.")
   ) {
     firebase.database().ref(gameCode).remove();
+    gameCode = "initial";
     document.getElementById("homePage").style.display = "block";
     document.getElementById("gamePage").style.display = "none";
-    document.getElementById("restartBtn").style.display = "none";
-    document.getElementById("deleteBtn").style.display = "none";
+    document.getElementById("gameBtns").style.display = "none";
+    document.getElementById("infoPage").style.display = "none";
+    document.getElementById("noGameFound").style.display = "none";
+  } else {
+    document.getElementById("homePage").style.display = "block";
+    document.getElementById("gamePage").style.display = "none";
+    document.getElementById("gameBtns").style.display = "none";
+    document.getElementById("infoPage").style.display = "none";
+    document.getElementById("noGameFound").style.display = "none";
   }
 }
 
@@ -235,12 +245,12 @@ function start() {
       if (roundCount % 2 == 0) updateData("isP1Turn", true);
       else updateData("isP1Turn", false);
       updateData("canPress", true);
-      updateData("playButton", "fas fa-info-circle");
+      updateData("playButton", "fas fa-circle-chevron-right");
       tempAlertGameOver("");
       tempAlertPasu("");
       if (isP1Turn)
-        tempAlert("It's player 1's turn. Select any one non zero hole.");
-      else tempAlert("It's player 2's turn. Select any one non zero hole.");
+        tempAlert("It's player 1's turn. Select any one non zero kuzhi.");
+      else tempAlert("It's player 2's turn. Select any one non zero kuzhi.");
     } else {
       gameOver();
     }
@@ -271,8 +281,8 @@ function gameOver() {
 
 function playerturn() {
   if (isP1Turn)
-    tempAlert("It's player 1's turn. Select any one non zero hole.");
-  else tempAlert("It's player 2's turn. Select any one non zero hole.");
+    tempAlert("It's player 1's turn. Select any one non zero kuzhi.");
+  else tempAlert("It's player 2's turn. Select any one non zero kuzhi.");
   tempAlertGameOver("");
   tempAlertPasu("");
 }
@@ -357,7 +367,7 @@ function empty(v) {
   updateData("canPress", true);
   for (i = 0; i < 7 - p1Blocks; i++) updateData("classes/" + i, "kuli");
   for (i = 7; i < 14 - p2Blocks; i++) updateData("classes/" + i, "kuli");
-  updateData("playButton", "fas fa-info-circle");
+  updateData("playButton", "fas fa-circle-info");
 
   pasu();
   isEmpty();
@@ -416,7 +426,7 @@ function select(v) {
   if (canPress && canPlayerPlay) {
     if ((isP1Turn && v < 7) || (!isP1Turn && v >= 7 && v < 14)) {
       if (kuli[v] != 0) {
-        updateData("playButton", "fas fa-angle-double-right");
+        updateData("playButton", "fas fa-circle-chevron-right");
         updateData("canPress", false);
         updateData("previousKuli", currentKuli);
         excecute(v);
@@ -424,8 +434,8 @@ function select(v) {
         if (
           document.getElementById("kuli" + (v + 1)).classList == "kuli blocked"
         )
-          tempAlert("Can't select a blocked hole. Select any other hole.");
-        else tempAlert("Can't select zero. Select any other hole.");
+          tempAlert("Can't select a blocked kuzhi. Select any other kuzhi.");
+        else tempAlert("Can't select zero. Select any other kuzhi.");
       }
       tempAlertGameOver("");
       tempAlertPasu("");
@@ -463,7 +473,7 @@ function isEmpty() {
 function addAll() {
   updateData("isCollected", false);
   updateData("isNewRound", false);
-  updateData("playButton", "fas fa-play");
+  updateData("playButton", "fas fa-circle-play");
   updateData("roundCount", roundCount + 1);
   tempAlertGameOver(
     "The round " +
@@ -481,3 +491,11 @@ document.addEventListener(
   },
   false
 );
+
+function howToPlay() {
+  document.getElementById("homePage").style.display = "none";
+  document.getElementById("gamePage").style.display = "none";
+  document.getElementById("gameBtns").style.display = "none";
+  document.getElementById("infoPage").style.display = "block";
+  document.getElementById("noGameFound").style.display = "none";
+}
