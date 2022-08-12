@@ -78,9 +78,11 @@ body {
   background-color: var(--pal-primary);
 }
 
-.bg-pal-secondary {
+.bg-pal-secondary,
+.bg-pal-secondary:hover {
   color: var(--pal-light);
   background-color: var(--pal-secondary);
+  border-color: #0000;
 }
 
 .bg-pal-tertiary {
@@ -99,6 +101,7 @@ body {
 
 a {
   text-decoration: none;
+  color: #fff;
 }
 
 a:hover {

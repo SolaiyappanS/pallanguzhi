@@ -31,23 +31,6 @@
   <body class="bg-pal-primary">
     <nav class="navbar navbar-dark">
       <div class="h3 m-3">Pallanguzhi</div>
-      <div id="gameBtns" class="text-end m-3 my-2" style="display: none">
-        <span class="fs-5 btn bg-pal-tertiary my-1" onclick="home()">
-          Home
-        </span>
-        <span class="fs-5 btn bg-pal-tertiary my-1" onclick="deleteGame()">
-          New Game
-        </span>
-        <span class="fs-5 btn bg-pal-tertiary my-1" onclick="resetGame()">
-          Restart Game
-        </span>
-        <span
-          class="fs-5 btn bg-pal-tertiary my-1"
-          onclick="showInstructions()"
-        >
-          Instructions
-        </span>
-      </div>
     </nav>
     <div class="d-flex text-center">
       <div id="homePage" class="p-3 mx-auto">
@@ -89,6 +72,23 @@
         </div>
       </div>
       <div id="gamePage" class="p-3 mx-auto" style="display: none">
+        <div class="m-3">
+          <span class="fs-5 btn bg-pal-tertiary my-1" onclick="home()">
+            Home
+          </span>
+          <span class="fs-5 btn bg-pal-tertiary my-1" onclick="switchPlayer()">
+            Change Player
+          </span>
+          <span class="fs-5 btn bg-pal-tertiary my-1" onclick="resetGame()">
+            Restart Game
+          </span>
+          <span
+            class="fs-5 btn bg-pal-tertiary my-1"
+            onclick="showInstructions()"
+          >
+            Instructions
+          </span>
+        </div>
         <div id="board" class="mx-5">
           <h3 id="gameCode">GAME CODE: SAMPLE</h3>
           <div class="bg-pal-secondary pb-3 px-3 mt-4 rounded">
@@ -118,12 +118,7 @@
           </div>
         </div>
         <div id="msgboard">
-          <p
-            id="playerInfo"
-            class="fs-4 btn bg-pal-tertiary mt-5"
-            onclick="switchPlayer()"
-            title="Change player"
-          >
+          <p id="playerInfo" class="fs-4 btn bg-pal-secondary mt-5">
             You're Player 1
           </p>
           <a onclick="start()">

@@ -98,7 +98,6 @@ function resetGame() {
   document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
   document.getElementById("homePage").style.display = "none";
   document.getElementById("gamePage").style.display = "block";
-  document.getElementById("gameBtns").style.display = "inline";
   document.getElementById("infoPage").style.display = "none";
   document.getElementById("noGameFound").style.display = "none";
   startTheGame();
@@ -129,7 +128,6 @@ function createNewGame() {
   document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
   document.getElementById("homePage").style.display = "none";
   document.getElementById("gamePage").style.display = "block";
-  document.getElementById("gameBtns").style.display = "inline";
   document.getElementById("infoPage").style.display = "none";
   document.getElementById("noGameFound").style.display = "none";
   startTheGame();
@@ -147,7 +145,6 @@ function joinExistingGame() {
         document.getElementById("gamePage").style.display = "block";
         document.getElementById("gameCode").innerHTML =
           "GAME CODE: " + gameCode;
-        document.getElementById("gameBtns").style.display = "inline";
         document.getElementById("infoPage").style.display = "none";
         document.getElementById("noGameFound").style.display = "none";
         startTheGame();
@@ -173,13 +170,11 @@ function home() {
     gameCode = "initial";
     document.getElementById("homePage").style.display = "block";
     document.getElementById("gamePage").style.display = "none";
-    document.getElementById("gameBtns").style.display = "none";
     document.getElementById("infoPage").style.display = "none";
     document.getElementById("noGameFound").style.display = "none";
   } else {
     document.getElementById("homePage").style.display = "block";
     document.getElementById("gamePage").style.display = "none";
-    document.getElementById("gameBtns").style.display = "none";
     document.getElementById("infoPage").style.display = "none";
     document.getElementById("noGameFound").style.display = "none";
   }
@@ -289,6 +284,15 @@ function playerturn() {
 
 function excecute(v) {
   updateData("previousKuli", v);
+  for (var i = 0; i < 14; i++) {
+    if (
+      document.getElementById("kuli" + (i + 1)).classList !== "kuli" &&
+      document.getElementById("kuli" + (i + 1)).classList !== "kuli blocked" &&
+      i !== v
+    )
+      updateData("classes/" + i, "kuli");
+  }
+  updateData("classes/" + v, "kuli start");
   var amount = kuli[v];
   var v1;
   var x = 0;
@@ -304,6 +308,7 @@ function excecute(v) {
     } else {
       v1 = v + i + x + 1;
       v1 %= 14;
+      updateData("classes/" + v1, "kuli path");
       updateData("kuli/" + v1, kuli[v1] + 1);
     }
   }
@@ -317,29 +322,7 @@ function excecute(v) {
     if (currentKuli < 7) updateData("currentKuli", 7);
     else updateData("currentKuli", 0);
   }
-  var i;
-  for (i = 0; i < 7 - p1Blocks; i++) {
-    if (i == previousKuli) updateData("classes/" + i, "kuli start");
-    else if (i > previousKuli && i < currentKuli && previousKuli < currentKuli)
-      updateData("classes/" + i, "kuli path");
-    else if (i > previousKuli && i != currentKuli && previousKuli > currentKuli)
-      updateData("classes/" + i, "kuli path");
-    else if (i < currentKuli && previousKuli > currentKuli)
-      updateData("classes/" + i, "kuli path");
-    else if (i == currentKuli) updateData("classes/" + i, "kuli end");
-    else updateData("classes/" + i, "kuli");
-  }
-  for (i = 7; i < 14 - p2Blocks; i++) {
-    if (i == previousKuli) updateData("classes/" + i, "kuli start");
-    else if (i > previousKuli && i < currentKuli && previousKuli < currentKuli)
-      updateData("classes/" + i, "kuli path");
-    else if (i > previousKuli && i != currentKuli && previousKuli > currentKuli)
-      updateData("classes/" + i, "kuli path");
-    else if (i < currentKuli && previousKuli > currentKuli)
-      updateData("classes/" + i, "kuli path");
-    else if (i == currentKuli) updateData("classes/" + i, "kuli end");
-    else updateData("classes/" + i, "kuli");
-  }
+  updateData("classes/" + currentKuli, "kuli end");
 }
 
 function empty(v) {
