@@ -154,30 +154,11 @@ function joinExistingGame() {
     });
 }
 
-function deleteGame() {
-  if (confirm("Are you sure for a New Game? This Game will be deleted.")) {
-    firebase.database().ref(gameCode).remove();
-    createNewGame();
-  }
-}
-
 function home() {
-  if (
-    gameCode !== "initial" &&
-    confirm("Are you sure to leave this Game? This Game will be deleted.")
-  ) {
-    firebase.database().ref(gameCode).remove();
-    gameCode = "initial";
-    document.getElementById("homePage").style.display = "block";
-    document.getElementById("gamePage").style.display = "none";
-    document.getElementById("infoPage").style.display = "none";
-    document.getElementById("noGameFound").style.display = "none";
-  } else {
-    document.getElementById("homePage").style.display = "block";
-    document.getElementById("gamePage").style.display = "none";
-    document.getElementById("infoPage").style.display = "none";
-    document.getElementById("noGameFound").style.display = "none";
-  }
+  document.getElementById("homePage").style.display = "block";
+  document.getElementById("gamePage").style.display = "none";
+  document.getElementById("infoPage").style.display = "none";
+  document.getElementById("noGameFound").style.display = "none";
 }
 
 function updateVal() {
@@ -225,9 +206,9 @@ function start() {
         roundCount +
         ", Player 1 has " +
         p1Amount +
-        " points and Player 2 has " +
+        " shells and Player 2 has " +
         p2Amount +
-        " points. Press the play button to continue."
+        " shells. Press the play button to continue."
     );
     tempAlertGameOver("");
     tempAlertPasu("");
@@ -334,16 +315,16 @@ function empty(v) {
     updateData("p1Amount", p1Amount + kuli[v1]);
     if (kuli[v1] != 0)
       tempAlert(
-        "Player 1 earns " + kuli[v1] + " point(s). Now it's Player 2's turn."
+        "Player 1 earns " + kuli[v1] + " shell(s). Now it's Player 2's turn."
       );
-    else tempAlert("Player 1 earns no points in this turn.");
+    else tempAlert("Player 1 earns no shells in this turn.");
   } else {
     updateData("p2Amount", p2Amount + kuli[v1]);
     if (kuli[v1] != 0)
       tempAlert(
-        "Player 2 earns " + kuli[v1] + " point(s). Now it's Player 1's turn."
+        "Player 2 earns " + kuli[v1] + " shell(s). Now it's Player 1's turn."
       );
-    else tempAlert("Player 2 earns no points in this turn.");
+    else tempAlert("Player 2 earns no shells in this turn.");
   }
   updateData("kuli/" + v1, 0);
   updateData("isP1Turn", !isP1Turn);
