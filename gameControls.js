@@ -265,15 +265,24 @@ function playerturn() {
 
 function excecute(v) {
   updateData("previousKuli", v);
-  for (var i = 0; i < 14; i++) {
+  for (var i = 0; i < 7 - p1Blocks; i++) {
     if (
       document.getElementById("kuli" + (i + 1)).classList !== "kuli" &&
       document.getElementById("kuli" + (i + 1)).classList !== "kuli blocked" &&
       i !== v
     )
       updateData("classes/" + i, "kuli");
+    else if (i === v) updateData("classes/" + v, "kuli start");
   }
-  updateData("classes/" + v, "kuli start");
+  for (var i = 7; i < 14 - p2Blocks; i++) {
+    if (
+      document.getElementById("kuli" + (i + 1)).classList !== "kuli" &&
+      document.getElementById("kuli" + (i + 1)).classList !== "kuli blocked" &&
+      i !== v
+    )
+      updateData("classes/" + i, "kuli");
+    else if (i === v) updateData("classes/" + v, "kuli start");
+  }
   var amount = kuli[v];
   var v1;
   var x = 0;
