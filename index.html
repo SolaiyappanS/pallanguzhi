@@ -41,7 +41,7 @@
             class="w-100 form-control my-2"
             placeholder="Enter 6 digit code"
             onkeyup="document.getElementById('joinBtn').disabled=!/^[A-Z0-9]{6}$/.test(this.value.trim())"
-            oninput="joinExistingGame()"
+            onKeyDown="if(event.keyCode==13) joinExistingGame();"
           />
           <button
             id="joinBtn"

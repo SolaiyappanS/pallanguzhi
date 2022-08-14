@@ -164,7 +164,7 @@ function home() {
 function updateVal() {
   var np1Blocks = 0,
     np2Blocks = 0;
-  for (i = 0; i < 7 - p1Blocks; i++) {
+  for (var i = 0; i < 7 - p1Blocks; i++) {
     if (p1Amount >= 5) {
       updateData("kuli/" + i, 5);
       updateData("p1Amount", p1Amount - 5);
@@ -174,7 +174,7 @@ function updateVal() {
       updateData("classes/" + i, "kuli blocked");
     }
   }
-  for (i = 7; i < 14 - p2Blocks; i++) {
+  for (var i = 7; i < 14 - p2Blocks; i++) {
     if (p2Amount >= 5) {
       updateData("kuli/" + i, 5);
       updateData("p2Amount", p2Amount - 5);
@@ -191,12 +191,12 @@ function updateVal() {
 function start() {
   if (!isCollected) {
     updateData("isCollected", true);
-    for (i = 0; i < 7; i++) {
+    for (var i = 0; i < 7; i++) {
       // adding elements in first row
       updateData("p1Amount", p1Amount + kuli[i]);
       updateData("kuli/" + i, 0);
     }
-    for (i = 7; i < 14; i++) {
+    for (var i = 7; i < 14; i++) {
       // adding elements in second row
       updateData("p2Amount", p2Amount + kuli[i]);
       updateData("kuli/" + i, 0);
@@ -338,8 +338,8 @@ function empty(v) {
   updateData("kuli/" + v1, 0);
   updateData("isP1Turn", !isP1Turn);
   updateData("canPress", true);
-  for (i = 0; i < 7 - p1Blocks; i++) updateData("classes/" + i, "kuli");
-  for (i = 7; i < 14 - p2Blocks; i++) updateData("classes/" + i, "kuli");
+  for (var i = 0; i < 7 - p1Blocks; i++) updateData("classes/" + i, "kuli");
+  for (var i = 7; i < 14 - p2Blocks; i++) updateData("classes/" + i, "kuli");
   updateData("playButton", "fas fa-circle-info");
 
   pasu();
@@ -364,10 +364,9 @@ function tempAlertGameOver(msg) {
 }
 
 function pasu() {
-  var i = 0;
   var pasuCount1 = 0;
   var pasuCount2 = 0;
-  for (i = 0; i < 14; i++) {
+  for (var i = 0; i < 14; i++) {
     //Checking for Pasu
     if (kuli[i] == 4) {
       if (i < 7) {
