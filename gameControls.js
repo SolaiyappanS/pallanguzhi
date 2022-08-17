@@ -208,7 +208,7 @@ function start() {
         p1Amount +
         " shells and Player 2 has " +
         p2Amount +
-        " shells. Press the play button to continue."
+        " shells. Press the Play button or Space Key to continue."
     );
     tempAlertGameOver("");
     tempAlertPasu("");
@@ -240,11 +240,11 @@ function start() {
 function gameOver() {
   if (p1Amount > p2Amount)
     tempAlertGameOver(
-      "Game Over. Player 1 Wins. Press the play button to play again"
+      "Game Over. Player 1 Wins. Press the Play button or Space Key to play again."
     );
   else
     tempAlertGameOver(
-      "Game Over. Player 2 Wins. Press the play button to play again"
+      "Game Over. Player 2 Wins. Press the Play button or Space Key to play again."
     );
   tempAlert("");
   tempAlertPasu("");
@@ -265,24 +265,6 @@ function playerturn() {
 
 function excecute(v) {
   updateData("previousKuli", v);
-  for (var i = 0; i < 7 - p1Blocks; i++) {
-    if (
-      document.getElementById("kuli" + (i + 1)).classList !== "kuli" &&
-      document.getElementById("kuli" + (i + 1)).classList !== "kuli blocked" &&
-      i !== v
-    )
-      updateData("classes/" + i, "kuli");
-    else if (i === v) updateData("classes/" + v, "kuli start");
-  }
-  for (var i = 7; i < 14 - p2Blocks; i++) {
-    if (
-      document.getElementById("kuli" + (i + 1)).classList !== "kuli" &&
-      document.getElementById("kuli" + (i + 1)).classList !== "kuli blocked" &&
-      i !== v
-    )
-      updateData("classes/" + i, "kuli");
-    else if (i === v) updateData("classes/" + v, "kuli start");
-  }
   var amount = kuli[v];
   var v1;
   var x = 0;
@@ -298,7 +280,6 @@ function excecute(v) {
     } else {
       v1 = v + i + x + 1;
       v1 %= 14;
-      updateData("classes/" + v1, "kuli path");
       updateData("kuli/" + v1, kuli[v1] + 1);
     }
   }
@@ -312,7 +293,28 @@ function excecute(v) {
     if (currentKuli < 7) updateData("currentKuli", 7);
     else updateData("currentKuli", 0);
   }
-  updateData("classes/" + currentKuli, "kuli end");
+  for (var i = 0; i < 7 - p1Blocks; i++) {
+    if (i == previousKuli) updateData("classes/" + i, "kuli start");
+    else if (i > previousKuli && i < currentKuli && previousKuli < currentKuli)
+      updateData("classes/" + i, "kuli path");
+    else if (i > previousKuli && i != currentKuli && previousKuli > currentKuli)
+      updateData("classes/" + i, "kuli path");
+    else if (i < currentKuli && previousKuli > currentKuli)
+      updateData("classes/" + i, "kuli path");
+    else if (i == currentKuli) updateData("classes/" + i, "kuli end");
+    else updateData("classes/" + i, "kuli");
+  }
+  for (var i = 7; i < 14 - p2Blocks; i++) {
+    if (i == previousKuli) updateData("classes/" + i, "kuli start");
+    else if (i > previousKuli && i < currentKuli && previousKuli < currentKuli)
+      updateData("classes/" + i, "kuli path");
+    else if (i > previousKuli && i != currentKuli && previousKuli > currentKuli)
+      updateData("classes/" + i, "kuli path");
+    else if (i < currentKuli && previousKuli > currentKuli)
+      updateData("classes/" + i, "kuli path");
+    else if (i == currentKuli) updateData("classes/" + i, "kuli end");
+    else updateData("classes/" + i, "kuli");
+  }
 }
 
 function empty(v) {
@@ -322,18 +324,12 @@ function empty(v) {
     v1 = (v1 + 1) % 14;
   if (isP1Turn) {
     updateData("p1Amount", p1Amount + kuli[v1]);
-    if (kuli[v1] != 0)
-      tempAlert(
-        "Player 1 earns " + kuli[v1] + " shell(s). Now it's Player 2's turn."
-      );
-    else tempAlert("Player 1 earns no shells in this turn.");
+    if (kuli[v1] != 0) tempAlert("Player 1 earns " + kuli[v1] + " shell(s)");
+    else tempAlert("Player 1 earns no shells in this turn");
   } else {
     updateData("p2Amount", p2Amount + kuli[v1]);
-    if (kuli[v1] != 0)
-      tempAlert(
-        "Player 2 earns " + kuli[v1] + " shell(s). Now it's Player 1's turn."
-      );
-    else tempAlert("Player 2 earns no shells in this turn.");
+    if (kuli[v1] != 0) tempAlert("Player 2 earns " + kuli[v1] + " shell(s)");
+    else tempAlert("Player 2 earns no shells in this turn");
   }
   updateData("kuli/" + v1, 0);
   updateData("isP1Turn", !isP1Turn);
@@ -380,12 +376,12 @@ function pasu() {
     }
   }
   if (pasuCount1 > 0 && pasuCount2 == 0)
-    tempAlertPasu("And Player 1 earns " + pasuCount1 + " Pasu(s).");
+    tempAlertPasu("and Player 1 earns " + pasuCount1 + " Pasu(s).");
   else if (pasuCount1 == 0 && pasuCount2 > 0)
-    tempAlertPasu("And Player 2 earns " + pasuCount2 + " Pasu(s).");
+    tempAlertPasu("and Player 2 earns " + pasuCount2 + " Pasu(s).");
   else if (pasuCount1 > 0 && pasuCount2 > 0)
     tempAlertPasu(
-      "And Player 1 earns " +
+      "and Player 1 earns " +
         pasuCount1 +
         " Pasu(s),\nPlayer 2 earns " +
         pasuCount2 +
@@ -430,7 +426,7 @@ function isEmpty() {
     kuli[5] == 0 &&
     kuli[6] == 0
   )
-    addAll();
+    addAll(1);
   else if (
     kuli[7] == 0 &&
     kuli[8] == 0 &&
@@ -440,19 +436,19 @@ function isEmpty() {
     kuli[12] == 0 &&
     kuli[13] == 0
   )
-    addAll();
+    addAll(2);
 }
-function addAll() {
+function addAll(num) {
   updateData("isCollected", false);
   updateData("isNewRound", false);
   updateData("playButton", "fas fa-circle-play");
   updateData("roundCount", roundCount + 1);
   tempAlertGameOver(
-    "The round " +
+    "Player " +
+      num +
+      " has no more shells to play. So, the round " +
       roundCount +
-      " is completed. Press Play button to play the round " +
-      (roundCount + 1) +
-      "."
+      " is completed. Press Play button or Space Key to continue."
   );
 }
 
