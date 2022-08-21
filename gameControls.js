@@ -34,10 +34,31 @@ function updateData(data, value) {
     .set(value);
 }
 
-function startTheGame() {
+function reloadTheGame() {
+  sessionStorage.setItem("gameCode", gameCode);
+  sessionStorage.setItem("reloadVariable", true);
+  document.location.reload();
+}
+
+window.onload = () => {
+  var reloading = sessionStorage.getItem("reloadVariable");
+  if (reloading) {
+    sessionStorage.removeItem("reloadVariable");
+    gameCode = sessionStorage.getItem("gameCode");
+    document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
+    document.getElementById("homePage").style.display = "none";
+    document.getElementById("gamePage").style.display = "block";
+    document.getElementById("infoPage").style.display = "none";
+    document.getElementById("noGameFound").style.display = "none";
+    startTheGame(gameCode);
+    tempAlert("Press Play button or Space Key to start the game");
+  }
+};
+
+function startTheGame(code) {
   firebase
     .database()
-    .ref("/" + gameCode)
+    .ref("/" + code)
     .on("value", (res) => {
       for (var i = 0; i < 14; i++) {
         document.getElementById("kuli" + (i + 1)).innerHTML = res.val().kuli[i];
@@ -100,7 +121,7 @@ function resetGame() {
   document.getElementById("gamePage").style.display = "block";
   document.getElementById("infoPage").style.display = "none";
   document.getElementById("noGameFound").style.display = "none";
-  startTheGame();
+  startTheGame(gameCode);
   tempAlert("Press Play button or Space Key to start the game");
 }
 
@@ -130,7 +151,7 @@ function createNewGame() {
   document.getElementById("gamePage").style.display = "block";
   document.getElementById("infoPage").style.display = "none";
   document.getElementById("noGameFound").style.display = "none";
-  startTheGame();
+  startTheGame(gameCode);
 }
 
 function joinExistingGame() {
@@ -147,7 +168,7 @@ function joinExistingGame() {
           "GAME CODE: " + gameCode;
         document.getElementById("infoPage").style.display = "none";
         document.getElementById("noGameFound").style.display = "none";
-        startTheGame();
+        startTheGame(gameCode);
       } else {
         document.getElementById("noGameFound").style.display = "block";
       }
