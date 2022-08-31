@@ -481,10 +481,10 @@ document.addEventListener(
   false
 );
 
-function howToPlay() {
-  document.getElementById("homePage").style.display = "none";
-  document.getElementById("gamePage").style.display = "none";
-  document.getElementById("gameBtns").style.display = "none";
+function showInstructions() {
   document.getElementById("infoPage").style.display = "block";
-  document.getElementById("noGameFound").style.display = "none";
+}
+
+function hideInstructions() {
+  document.getElementById("infoPage").style.display = "none";
 }
