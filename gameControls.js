@@ -155,7 +155,7 @@ function createNewGame() {
 }
 
 function joinExistingGame() {
-  var code = document.getElementById("oldGameCode").value;
+  var code = document.getElementById("oldGameCode").value.toUpperCase();
   firebase
     .database()
     .ref("/")

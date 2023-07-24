@@ -41,7 +41,7 @@
             id="oldGameCode"
             class="w-100 form-control my-2"
             placeholder="Enter 6 digit code"
-            onkeyup="document.getElementById('joinBtn').disabled=!/^[A-Z0-9]{6}$/.test(this.value.trim())"
+            onkeyup="document.getElementById('joinBtn').disabled=!/^[a-zA-Z0-9]{6}$/.test(this.value.trim())"
             onKeyDown="if(event.keyCode==13) joinExistingGame();"
           />
           <button
@@ -50,7 +50,7 @@
             onclick="joinExistingGame()"
             disabled
           >
-            Join Game
+            Join Existing Game
           </button>
           <button
             class="w-100 btn btn-lg bg-pal-tertiary my-2"
@@ -142,7 +142,15 @@
             </div>
             <div class="modal-body text-start">
               <p>
-                You can start the game by clicking the play button or the Space
+                To start a new game, click the 'Create New Game' button and
+                share the 6 digit code with the other player.
+              </p>
+              <p>
+                If you already have a game code, enter the code and click 'Join
+                Existing Game' to start playing.
+              </p>
+              <p>
+                You can begin the game by clicking the play button or the Space
                 key. Player 1 should start the game.
               </p>
               <p>
