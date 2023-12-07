@@ -36,11 +36,17 @@
     <div class="d-flex text-center">
       <div id="homePage" class="p-3 mx-auto">
         <div class="w-100 m-auto">
-          <h1 class="h3 mb-3">Pallanguzhi</h1>
+          <h1 class="h3 mb-3">Pallanguzhi - A Tamil Board Game</h1>
+          <button
+            class="w-100 btn btn-lg bg-pal-tertiary my-2"
+            onclick="createNewGame()"
+          >
+            New Game
+          </button>
           <input
             id="oldGameCode"
             class="w-100 form-control my-2"
-            placeholder="Enter 6 digit code"
+            placeholder="Having a Game Code? Enter here :)"
             onkeyup="document.getElementById('joinBtn').disabled=!/^[a-zA-Z0-9]{6}$/.test(this.value.trim())"
             onKeyDown="if(event.keyCode==13) joinExistingGame();"
           />
@@ -50,13 +56,7 @@
             onclick="joinExistingGame()"
             disabled
           >
-            Join Existing Game
-          </button>
-          <button
-            class="w-100 btn btn-lg bg-pal-tertiary my-2"
-            onclick="createNewGame()"
-          >
-            Create New Game
+            Join Game
           </button>
           <button
             class="w-100 btn btn-lg bg-pal-tertiary my-2"
