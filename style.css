@@ -108,6 +108,7 @@ a:hover {
   color: var(--pal-light);
 }
 
+#oldGameCode,
 #oldGameCode::placeholder {
   text-align: center;
 }
