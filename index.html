@@ -6,16 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pallanguzhi</title>
     <link rel="icon" type="image/ico" href="favicon.ico" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://kit.fontawesome.com/0a03bb24ff.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <script src="fontAwesome.js"></script>
     <link
       href="https://fonts.googleapis.com/css?family=Finlandica"
       rel="stylesheet"
@@ -97,7 +89,10 @@
         <div id="board" class="mx-5">
           <h3 id="gameCode">GAME CODE: SAMPLE</h3>
           <div class="bg-pal-secondary pb-3 px-3 mt-4 rounded">
-            <div class="fw-bold fs-6 text-start pt-2">Player 1</div>
+            <div class="fw-bold fs-6 text-start pt-2">
+              Player 1
+              <span id="pl1star" class="text-pal-tertiary">●</span>
+            </div>
             <span id="kuli2" class="kuli" onclick="select(1);">0</span>
             <span id="kuli3" class="kuli" onclick="select(2);">0</span>
             <span id="kuli4" class="kuli" onclick="select(3);">0</span>
@@ -119,13 +114,14 @@
             <span id="kuli11" class="kuli" onclick="select(10);">0</span>
             <span id="kuli10" class="kuli" onclick="select(9);">0</span>
             <span id="kuli9" class="kuli" onclick="select(8);">0</span>
-            <div class="fw-bold fs-6 text-end pb-2">Player 2</div>
+            <div class="fw-bold fs-6 text-end pb-2">
+              <span id="pl2star" class="text-pal-tertiary">●</span>
+              Player 2
+            </div>
           </div>
         </div>
         <div id="msgboard">
-          <p id="playerInfo" class="fs-4 btn bg-pal-secondary mt-5">
-            You're Player 1
-          </p>
+          <p id="playerInfo" class="fs-4 mt-5">You're Player 1</p>
           <a onclick="start()">
             <i id="playButton" class="far fa-play"></i>
           </a>

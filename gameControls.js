@@ -87,6 +87,12 @@ function startTheGame(code) {
       document.getElementById("msg").innerHTML = res.val().msgTextBox;
       document.getElementById("pasu").innerHTML = res.val().pasuTextBox;
       document.getElementById("gameOver").innerHTML = res.val().gameOverTextBox;
+      document.getElementById("pl1star").style.display = isP1Turn
+        ? "contents"
+        : "none";
+      document.getElementById("pl2star").style.display = isP1Turn
+        ? "none"
+        : "contents";
     });
 }
 
@@ -257,9 +263,15 @@ function start() {
       updateData("playButton", "fas fa-circle-chevron-right");
       tempAlertGameOver("");
       tempAlertPasu("");
-      if (isP1Turn)
+      if (isP1Turn) {
         tempAlert("It's player 1's turn. Select any one non zero kuzhi.");
-      else tempAlert("It's player 2's turn. Select any one non zero kuzhi.");
+        document.getElementById("pl1star").style.display = "contents";
+        document.getElementById("pl2star").style.display = "none";
+      } else {
+        tempAlert("It's player 2's turn. Select any one non zero kuzhi.");
+        document.getElementById("pl1star").style.display = "none";
+        document.getElementById("pl2star").style.display = "contents";
+      }
     } else {
       gameOver();
     }
@@ -289,9 +301,15 @@ function gameOver() {
 }
 
 function playerturn() {
-  if (isP1Turn)
+  if (isP1Turn) {
     tempAlert("It's player 1's turn. Select any one non zero kuzhi.");
-  else tempAlert("It's player 2's turn. Select any one non zero kuzhi.");
+    document.getElementById("pl1star").style.display = "contents";
+    document.getElementById("pl2star").style.display = "none";
+  } else {
+    tempAlert("It's player 2's turn. Select any one non zero kuzhi.");
+    document.getElementById("pl1star").style.display = "none";
+    document.getElementById("pl2star").style.display = "contents";
+  }
   tempAlertGameOver("");
   tempAlertPasu("");
 }
@@ -441,8 +459,15 @@ function select(v) {
       tempAlertGameOver("");
       tempAlertPasu("");
     } else {
-      if (isP1Turn) tempAlert("It's Player 1's turn.");
-      else tempAlert("It's Player 2's turn.");
+      if (isP1Turn) {
+        tempAlert("It's player 1's turn. Select any one non zero kuzhi.");
+        document.getElementById("pl1star").style.display = "contents";
+        document.getElementById("pl2star").style.display = "none";
+      } else {
+        tempAlert("It's player 2's turn. Select any one non zero kuzhi.");
+        document.getElementById("pl1star").style.display = "none";
+        document.getElementById("pl2star").style.display = "contents";
+      }
     }
     tempAlertGameOver("");
     tempAlertPasu("");
