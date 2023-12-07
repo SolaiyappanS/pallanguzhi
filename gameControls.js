@@ -13,6 +13,9 @@ var currentKuli = 0;
 var isCollected = true;
 var isPlayer1 = true;
 var canPlayerPlay = true;
+var msgTextBox = "Press Play button or Space Key to start the game";
+var pasuTextBox = "";
+var gameOverTextBox = "";
 
 function switchPlayer() {
   if (document.getElementById("playerInfo").innerHTML !== "You're Player 2") {
@@ -81,6 +84,9 @@ function startTheGame(code) {
       isCollected = res.val().isCollected;
       document.getElementById("playButton").classList = res.val().playButton;
       canPlayerPlay = res.val().isP1Turn == isPlayer1;
+      document.getElementById("msg").innerHTML = res.val().msgTextBox;
+      document.getElementById("pasu").innerHTML = res.val().pasuTextBox;
+      document.getElementById("gameOver").innerHTML = res.val().gameOverTextBox;
     });
 }
 
@@ -114,6 +120,9 @@ function resetGame() {
       previousKuli: 0,
       currentKuli: 0,
       playButton: "fas fa-circle-play",
+      msgTextBox: "Press Play button or Space Key to start the game",
+      pasuTextBox: "",
+      gameOverTextBox: "",
     });
 
   document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
@@ -144,6 +153,9 @@ function createNewGame() {
       previousKuli: 0,
       currentKuli: 0,
       playButton: "fas fa-circle-play",
+      msgTextBox: "Press Play button or Space Key to start the game",
+      pasuTextBox: "",
+      gameOverTextBox: "",
     });
 
   document.getElementById("gameCode").innerHTML = "GAME CODE: " + gameCode;
@@ -371,13 +383,13 @@ function nextTurn() {
 }
 
 function tempAlert(msg) {
-  document.getElementById("msg").innerHTML = msg;
+  updateData("msgTextBox", msg);
 }
 function tempAlertPasu(msg) {
-  document.getElementById("pasu").innerHTML = msg;
+  updateData("pasuTextBox", msg);
 }
 function tempAlertGameOver(msg) {
-  document.getElementById("gameOver").innerHTML = msg;
+  updateData("gameOverTextBox", msg);
 }
 
 function pasu() {
