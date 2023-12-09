@@ -112,3 +112,15 @@ a:hover {
 #oldGameCode::placeholder {
   text-align: center;
 }
+
+@media (max-width: 500px) {
+  #gamePage {
+    zoom: 60%;
+  }
+}
+
+@media (max-width: 300px) {
+  #gamePage {
+    zoom: 45%;
+  }
+}
