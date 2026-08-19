@@ -2,10 +2,48 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{userId} {
-      allow read, write: if false;
+      allow read, write: if isSignedIn() && request.auth.uid == userId;
     }
     match /games/{gameId} {
-      allow read, write: if false;
+      allow create: if isSignedIn()
+        && request.resource.data.code == gameId
+        && request.resource.data.player1Id == request.auth.uid
+        && request.resource.data.player2Id == null
+        && validState(request.resource.data.state);
+      allow read: if isPlayer(resource.data);
+      allow update: if isPlayer(resource.data)
+        && request.resource.data.code == resource.data.code
+        && request.resource.data.player1Id == resource.data.player1Id
+        && (request.resource.data.player2Id == resource.data.player2Id
+          || (resource.data.player2Id == null && request.resource.data.player2Id == request.auth.uid))
+        && validState(request.resource.data.state);
+      allow delete: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function isPlayer(game) {
+      return isSignedIn() && (game.player1Id == request.auth.uid || game.player2Id == request.auth.uid);
+    }
+    function validState(state) {
+      return state.keys().hasAll([
+        'kuli', 'classes', 'p1Amount', 'p2Amount', 'isNewRound', 'canPress',
+        'isCollected', 'isP1Turn', 'roundCount', 'p1Blocks', 'p2Blocks',
+        'previousKuli', 'currentKuli', 'msgTextBox', 'pasuTextBox', 'gameOverTextBox'
+      ])
+      && state.kuli is list && state.kuli.size() == 14
+      && state.classes is list && state.classes.size() == 14
+      && state.p1Amount is int && state.p1Amount >= 0
+      && state.p2Amount is int && state.p2Amount >= 0
+      && state.roundCount is int && state.roundCount >= 0
+      && state.p1Blocks is int && state.p1Blocks >= 0 && state.p1Blocks <= 7
+      && state.p2Blocks is int && state.p2Blocks >= 0 && state.p2Blocks <= 7
+      && state.previousKuli is int && state.previousKuli >= 0 && state.previousKuli < 14
+      && state.currentKuli is int && state.currentKuli >= 0 && state.currentKuli < 14
+      && state.isNewRound is bool && state.canPress is bool && state.isCollected is bool
+      && state.isP1Turn is bool
+      && state.msgTextBox is string && state.pasuTextBox is string && state.gameOverTextBox is string;
     }
   }
 }

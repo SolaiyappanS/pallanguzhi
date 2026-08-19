@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { getToken } from "./firebase";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+import { createGame as createGameInFirestore, joinGame as joinGameInFirestore, performAction, resetGame, subscribeGame } from "./firestore";
 const pitOrder = [1, 2, 3, 4, 5, 6, 0, 13, 12, 11, 10, 9, 8, 7];
 
 function App() {
@@ -12,20 +10,9 @@ function App() {
   const [busy, setBusy] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
 
-  async function request(path, options = {}) {
-    const token = await getToken();
-    const response = await fetch(`${API_URL}${path}`, {
-      ...options,
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, ...options.headers }
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || "Something went wrong.");
-    return data;
-  }
-
   async function createGame() {
     setBusy(true); setError("");
-    try { const data = await request("/api/games", { method: "POST" }); setGame(data); setCode(data.code); setScreen("game"); }
+    try { const data = await createGameInFirestore(); setGame(data); setCode(data.code); setScreen("game"); }
     catch (err) { setError(err.message); }
     finally { setBusy(false); }
   }
@@ -33,34 +20,30 @@ function App() {
   async function joinGame() {
     if (!/^[a-z0-9]{6}$/i.test(code.trim())) return setError("Enter a six-character game code.");
     setBusy(true); setError("");
-    try { const data = await request(`/api/games/${code.trim().toUpperCase()}/join`, { method: "POST" }); setGame(data); setCode(data.code); setScreen("game"); }
+    try { const data = await joinGameInFirestore(code.trim()); setGame(data); setCode(data.code); setScreen("game"); }
     catch (err) { setError(err.message); }
     finally { setBusy(false); }
   }
 
-  async function refresh() {
-    if (!code) return;
-    try { setGame(await request(`/api/games/${code}`)); } catch (err) { setError(err.message); }
-  }
-
   async function action(payload) {
     setBusy(true); setError("");
-    try { setGame(await request(`/api/games/${code}/actions`, { method: "POST", body: JSON.stringify(payload) })); }
+    try { setGame(await performAction(code, payload)); }
     catch (err) { setError(err.message); }
     finally { setBusy(false); }
   }
 
   async function reset() {
     setBusy(true); setError("");
-    try { setGame(await request(`/api/games/${code}/reset`, { method: "POST" })); }
+    try { setGame(await resetGame(code)); }
     catch (err) { setError(err.message); }
     finally { setBusy(false); }
   }
 
   useEffect(() => {
     if (screen !== "game") return undefined;
-    const timer = setInterval(refresh, 1500);
-    return () => clearInterval(timer);
+    let unsubscribe;
+    subscribeGame(code, setGame, (err) => setError(err.message)).then((stop) => { unsubscribe = stop; }).catch((err) => setError(err.message));
+    return () => unsubscribe?.();
   }, [screen, code]);
 
   useEffect(() => {
