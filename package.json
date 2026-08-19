@@ -1,0 +1,25 @@
+{
+  "name": "pallanguzhi",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"node server/index.js\" \"vite\"",
+    "build": "vite build",
+    "start": "node server/index.js",
+    "check": "node --check server/game.js && node --check server/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "firebase-admin": "^13.0.2",
+    "firebase": "^11.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "vite": "^6.0.5"
+  }
+}
