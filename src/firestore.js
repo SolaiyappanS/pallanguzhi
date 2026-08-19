@@ -48,14 +48,13 @@ export async function createGame() {
     const ref = doc(games, code);
     try {
       const result = await runTransaction(db, async (transaction) => {
-        if ((await transaction.get(ref)).exists()) throw new Error("CODE_COLLISION");
         const state = initialState();
         transaction.create(ref, { code, state, player1Id: user.uid, player2Id: null, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
         return { code, player: 1, state: publicState(state) };
       });
       return result;
     } catch (error) {
-      if (error.message !== "CODE_COLLISION" || attempt === 4) throw error;
+      if (error.code !== "already-exists" || attempt === 4) throw error;
     }
   }
   throw new Error("Could not create a game. Try again.");

@@ -10,7 +10,8 @@ service cloud.firestore {
         && request.resource.data.player1Id == request.auth.uid
         && request.resource.data.player2Id == null
         && validState(request.resource.data.state);
-      allow read: if isPlayer(resource.data);
+      allow read: if isPlayer(resource.data)
+        || (isSignedIn() && resource.data.player2Id == null);
       allow update: if isPlayer(resource.data)
         && request.resource.data.code == resource.data.code
         && request.resource.data.player1Id == resource.data.player1Id
