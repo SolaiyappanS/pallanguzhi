@@ -11,12 +11,12 @@ import { initializeApp } from "firebase/app";
 import { applyAction, initialState, publicState } from "../server/game.js";
 
 const config = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyA9wnNqhECGRFg_OefPMC_RCmKWtmKSoXs",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "pallanguzhi-4871c.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "pallanguzhi-4871c",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "pallanguzhi-4871c.appspot.com",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "706492757994",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:706492757994:web:fa69ac76b0525962342493"
 };
 
 const app = initializeApp(config);
