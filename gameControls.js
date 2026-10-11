@@ -173,12 +173,18 @@ function createNewGame() {
 }
 
 function joinExistingGame() {
-  var code = document.getElementById("oldGameCode").value.toUpperCase();
+  var code = document.getElementById("oldGameCode").value.trim().toUpperCase();
+  if (!/^[A-Z0-9]{6}$/.test(code)) {
+    document.getElementById("noGameFound").style.display = "block";
+    return;
+  }
+
   firebase
     .database()
-    .ref("/")
-    .on("value", (res) => {
-      if (code in res.val()) {
+    .ref("/" + code)
+    .once("value")
+    .then((snapshot) => {
+      if (snapshot.exists()) {
         gameCode = code;
         document.getElementById("homePage").style.display = "none";
         document.getElementById("gamePage").style.display = "block";
@@ -190,6 +196,9 @@ function joinExistingGame() {
       } else {
         document.getElementById("noGameFound").style.display = "block";
       }
+    })
+    .catch(() => {
+      document.getElementById("noGameFound").style.display = "block";
     });
 }
 
