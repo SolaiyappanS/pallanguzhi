@@ -1,0 +1,62 @@
+#homePage {
+  width: min(100%, 760px);
+}
+
+.lobby-list {
+  max-height: 48vh;
+  overflow: auto;
+}
+
+.lobby-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+}
+
+.lobby-entry + .lobby-entry {
+  border-top: 1px solid rgb(220 215 201 / 18%);
+}
+
+.lobby-entry-details {
+  min-width: 0;
+}
+
+.game-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.instructions-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: block;
+  overflow: auto;
+  background: rgb(0 0 0 / 60%);
+}
+
+.play-control {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+}
+
+.play-control:disabled {
+  opacity: 1;
+}
+
+.pasu-message {
+  white-space: pre-line;
+}
+
+@media (max-width: 560px) {
+  .lobby-entry {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
